@@ -13,7 +13,7 @@
 				"folderPath": "ADWorks/Output",
 				"fileSystem": "filecontainer"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "\t",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
