@@ -55,92 +55,6 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Copy data1",
-							"type": "Copy",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "DelimitedTextSource",
-									"storeSettings": {
-										"type": "AzureBlobFSReadSettings",
-										"recursive": true,
-										"enablePartitionDiscovery": false
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
-									}
-								},
-								"sink": {
-									"type": "DelimitedTextSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
-									}
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "SourcePP_DS",
-									"type": "DatasetReference",
-									"parameters": {
-										"DSContainer": {
-											"value": "@pipeline().parameters.PPContainer",
-											"type": "Expression"
-										},
-										"DSInput": {
-											"value": "@pipeline().parameters.PPInput",
-											"type": "Expression"
-										},
-										"DSFilename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "Sink_DS",
-									"type": "DatasetReference",
-									"parameters": {
-										"SinkContainer": {
-											"value": "@pipeline().parameters.PPContainer",
-											"type": "Expression"
-										},
-										"SinkOutput": {
-											"value": "@pipeline().parameters.PPOutput",
-											"type": "Expression"
-										},
-										"SinkFilename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						},
-						{
 							"name": "If Condition1",
 							"type": "IfCondition",
 							"dependsOn": [],
@@ -150,9 +64,9 @@
 									"value": "@endswith(item().name,'csv')",
 									"type": "Expression"
 								},
-								"ifTrueActivities": [
+								"ifFalseActivities": [
 									{
-										"name": "Copy data1_copy1",
+										"name": "txt copy",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
@@ -223,6 +137,98 @@
 												"parameters": {
 													"SinkContainer": {
 														"value": "@pipeline().parameters.PPContainer",
+														"type": "Expression"
+													},
+													"SinkOutput": {
+														"value": "@pipeline().parameters.PPOutTXT",
+														"type": "Expression"
+													},
+													"SinkFilename": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "csv copy",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "SourcePP_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"DSContainer": {
+														"value": "@pipeline().parameters.PPContainer",
+														"type": "Expression"
+													},
+													"DSInput": {
+														"value": "@pipeline().parameters.PPInput",
+														"type": "Expression"
+													},
+													"DSFilename": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Sink_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"SinkContainer": {
+														"value": "@pipeline().parameters.PPContainer",
+														"type": "Expression"
+													},
+													"SinkOutput": {
+														"value": "@pipeline().parameters.PPOutCSV",
 														"type": "Expression"
 													},
 													"SinkFilename": {
