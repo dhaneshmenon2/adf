@@ -9,7 +9,7 @@
 			"DS_Container": {
 				"type": "string"
 			},
-			"DS_OutputSales": {
+			"DS_Output": {
 				"type": "string"
 			},
 			"DS_Filename": {
