@@ -31,7 +31,21 @@
 				"inputs": [
 					{
 						"referenceName": "SourcePP_DS",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"DSContainer": {
+								"value": "@pipeline().parameters.PPContainer",
+								"type": "Expression"
+							},
+							"DSInput": {
+								"value": "@pipeline().parameters.PPInputDir",
+								"type": "Expression"
+							},
+							"DSFilename": {
+								"value": "@pipeline().parameters.PPFilename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
