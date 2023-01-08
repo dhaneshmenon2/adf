@@ -225,10 +225,6 @@
 														"value": "@pipeline().parameters.PPContainer",
 														"type": "Expression"
 													},
-													"SinkOutput": {
-														"value": "@pipeline().parameters.PPOutput",
-														"type": "Expression"
-													},
 													"SinkFilename": {
 														"value": "@item().name",
 														"type": "Expression"
@@ -246,13 +242,24 @@
 		],
 		"parameters": {
 			"PPContainer": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "filecontainer"
 			},
 			"PPInput": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "ADWorks/Input"
 			},
 			"PPOutput": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "ADWorks/Output"
+			},
+			"PPOutCSV": {
+				"type": "string",
+				"defaultValue": "ADWorks/Output/csv"
+			},
+			"PPOutTXT": {
+				"type": "string",
+				"defaultValue": "ADWorks/Output/txt"
 			}
 		},
 		"annotations": []
