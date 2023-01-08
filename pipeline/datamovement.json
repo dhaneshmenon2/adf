@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Input to Output",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -61,11 +61,11 @@
 				]
 			},
 			{
-				"name": "Copy data2",
+				"name": "Output to Archive",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Input to Output",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -126,11 +126,11 @@
 				]
 			},
 			{
-				"name": "Delete1",
+				"name": "Delete file in Output",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "Copy data2",
+						"activity": "Output to Archive",
 						"dependencyConditions": [
 							"Succeeded"
 						]
