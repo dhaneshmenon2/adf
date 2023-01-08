@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "saleas.txt",
 				"folderPath": "ADWorks/Archive",
 				"fileSystem": "filecontainer"
 			},
