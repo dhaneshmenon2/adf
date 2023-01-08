@@ -36,6 +36,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"name": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
