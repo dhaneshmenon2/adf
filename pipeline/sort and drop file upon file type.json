@@ -112,7 +112,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "SourcePP_DS",
+												"referenceName": "Source_DS",
 												"type": "DatasetReference",
 												"parameters": {
 													"DSContainer": {
@@ -200,7 +200,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "SourcePP_DS",
+												"referenceName": "Source_DS",
 												"type": "DatasetReference",
 												"parameters": {
 													"DSContainer": {

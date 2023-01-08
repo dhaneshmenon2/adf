@@ -1,5 +1,5 @@
 {
-	"name": "SourcePP_DS",
+	"name": "Source_DS",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
