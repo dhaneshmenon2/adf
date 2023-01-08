@@ -19,7 +19,9 @@
 						"referenceName": "MetaInput_src",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"enablePartitionDiscovery": false
@@ -58,6 +60,94 @@
 									"value": "@startswith(item().name,'Sales')",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Copy to Market",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "SourcePP_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"DSContainer": {
+														"value": "@pipeline().parameters.PPContain",
+														"type": "Expression"
+													},
+													"DSInput": {
+														"value": "@pipeline().parameters.PPInput",
+														"type": "Expression"
+													},
+													"DSFilename": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Sink_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"SinkContainer": {
+														"value": "@pipeline().parameters.PPContain",
+														"type": "Expression"
+													},
+													"SinkOutput": {
+														"value": "@pipeline().parameters.PPOutputMarket",
+														"type": "Expression"
+													},
+													"SinkFilename": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Copy to Sales",
@@ -83,12 +173,65 @@
 													"type": "DelimitedTextReadSettings"
 												}
 											},
-											"enableStaging": false
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
 										},
 										"inputs": [
 											{
-												"referenceName": "DS_Source",
-												"type": "DatasetReference"
+												"referenceName": "SourcePP_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"DSContainer": {
+														"value": "@pipeline().parameters.PPContain",
+														"type": "Expression"
+													},
+													"DSInput": {
+														"value": "@pipeline().parameters.PPInput",
+														"type": "Expression"
+													},
+													"DSFilename": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Sink_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"SinkContainer": {
+														"value": "@pipeline().parameters.PPContain",
+														"type": "Expression"
+													},
+													"SinkOutput": {
+														"value": "@pipeline().parameters.PPOutputSales",
+														"type": "Expression"
+													},
+													"SinkFilename": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									}
@@ -106,7 +249,7 @@
 			},
 			"PPInput": {
 				"type": "string",
-				"defaultValue": "ADWorks/Input"
+				"defaultValue": "ADWorks/Input/"
 			},
 			"PPOutputMarket": {
 				"type": "string",
