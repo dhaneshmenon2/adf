@@ -70,7 +70,21 @@
 				"outputs": [
 					{
 						"referenceName": "Sink_DS",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SinkContainer": {
+								"value": "@pipeline().parameters.PPContainer",
+								"type": "Expression"
+							},
+							"SinkOutput": {
+								"value": "@pipeline().parameters.PPOutputDir",
+								"type": "Expression"
+							},
+							"SinkFilename": {
+								"value": "@pipeline().parameters.PPFilename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
