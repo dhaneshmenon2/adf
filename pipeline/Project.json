@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Unzip File to Bronze",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
