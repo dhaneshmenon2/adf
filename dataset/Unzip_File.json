@@ -11,8 +11,8 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "AdventureWorksLT2012-20230107T110325Z-001.zip",
-				"folderPath": "storage",
-				"fileSystem": "pocprojectcontainer"
+				"folderPath": "POCProject/Storage",
+				"fileSystem": "filecontainer"
 			},
 			"columnDelimiter": ",",
 			"compressionCodec": "ZipDeflate",
