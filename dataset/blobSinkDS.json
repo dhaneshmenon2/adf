@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "testfile.txt",
-				"folderPath": "testdirectorydelet",
+				"folderPath": "167testdirectory",
 				"container": "testcontainer"
 			},
 			"columnDelimiter": ",",
